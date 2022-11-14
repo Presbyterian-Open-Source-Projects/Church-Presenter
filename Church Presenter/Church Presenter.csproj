@@ -10,7 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\images\a1.png" />
     <None Remove="Resources\videos\a2.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\images\a1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -18,14 +18,21 @@ namespace Church_Presenter
 
             foreach (var screen in Screen.AllScreens)
             {
-                var window = new ExtendedWindow();
+               
+                if (!screen.Primary)
+                {
+                    var window = new ExtendedWindow();
 
-                window.Left = screen.WorkingArea.Left / ratio;
-                window.Top = screen.WorkingArea.Top / ratio;
-                window.Width = (screen.WorkingArea.Width / ratio)/5;
-                window.Height = (screen.WorkingArea.Height / ratio)/5;
+                    window.Left = screen.WorkingArea.Left / ratio;
+                    window.Top = screen.WorkingArea.Top / ratio;
+                    window.Width = (screen.WorkingArea.Width / ratio);
+                    window.Height = (screen.WorkingArea.Height / ratio);
+                    window.Show();
 
-                window.Show();
+                    window.WindowState = WindowState.Maximized;
+
+                }    
+                
             }
         }
     }
