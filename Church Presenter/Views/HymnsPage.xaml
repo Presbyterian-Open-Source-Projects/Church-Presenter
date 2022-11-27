@@ -62,5 +62,62 @@
             HorizontalAlignment="Left"
             Content="Hello world"
             Icon="Fluent24" />
+        <Border
+            Grid.Row="0"
+            Height="500"
+            CornerRadius="8,0,0,0">
+            <Border.Background>
+                <ImageBrush
+                    ImageSource="/Resources/images/a1.png" 
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Stretch="UniformToFill" />
+            </Border.Background>
+            <Border CornerRadius="8,0,0,0">
+                <Border.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#1F000000" />
+                        <GradientStop Offset="1" Color="#4F000000" />
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel
+                        Margin="64"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <TextBlock
+                            FontSize="18"
+                            Foreground="#B7FFFFFF"
+                            Text="Windows Presentation Foundation" />
+                        <TextBlock
+                            FontSize="28"
+                            FontWeight="Bold"
+                            Foreground="#FFFFFF"
+                            Text="Fluent UI" />
+                        <TextBlock
+                            FontSize="18"
+                            Foreground="#B7FFFFFF"
+                            Text="Build Fluent experiences on Windows using WPF UI." />
+                        <ui:Button
+                            Height="36"
+                            Margin="0,6,0,0"
+                            Padding="30,6"
+                            HorizontalAlignment="Left"
+                            Appearance="Transparent"
+                            Command="{Binding ViewModel.NavigateCommand}"
+                            CommandParameter="navigate_to_controls"
+                            Content="Check out the controls"
+                            Foreground="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                    </StackPanel>
+                    <TextBlock
+                        Margin="12"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontSize="10"
+                        Foreground="#57FFFFFF"
+                        Text="Created by lepo.co" />
+                </Grid>
+            </Border>
+        </Border>
     </StackPanel>
 </Page>

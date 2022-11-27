@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LiveScreenPage">
+      Title="LiveOutputPage">
 
     <Grid>
         <Image Source="/Resources/images/a1.png" />

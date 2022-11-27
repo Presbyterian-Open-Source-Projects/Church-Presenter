@@ -11,7 +11,6 @@ namespace Church_Presenter.Views
         {
             InitializeComponent();
         }
-
         private void TaskbarStateComboBox_OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (sender is not System.Windows.Controls.ComboBox comboBox)

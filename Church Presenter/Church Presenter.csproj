@@ -3,21 +3,31 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
-		<RootNamespace>Church_Presenter</RootNamespace>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<RootNamespace>Church_Presenter</RootNamespace>
+		<StartupObject>Church_Presenter.App</StartupObject>
 		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<Version>$(Version)</Version>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ApplicationDefinition Remove="App.xaml" />
+		<Page Include="App.xaml" />
+	</ItemGroup>
+	
+	
 	<ItemGroup>
 		<None Remove="Resources\images\a1.png" />
 		<None Remove="Resources\videos\a2.mp4" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Resources\images\a1.png">
+		<Resource Include="Resources\images\a1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -33,6 +43,10 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
 	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ChurchPresenter.Core\ChurchPresenter.Core.csproj" />
+		<ProjectReference Include="..\ChurchPresenter.Shared\ChurchPresenter.Shared.csproj" />
+	</ItemGroup>
 
 	<Target Name="FixDuplicateAnalyzers" BeforeTargets="CoreCompile">
 		<ItemGroup>
@@ -40,11 +54,7 @@
 			<Analyzer Remove="@(Analyzer)" />
 			<Analyzer Include="@(FilteredAnalyzer)" />
 		</ItemGroup>
-	</Target>
+	</Target>	
 
-	<ItemGroup>
-		<ProjectReference Include="..\ChurchPresenter.Core\ChurchPresenter.Core.csproj" />
-		<ProjectReference Include="..\ChurchPresenter.Shared\ChurchPresenter.Shared.csproj" />
-	</ItemGroup>
 
 </Project>
