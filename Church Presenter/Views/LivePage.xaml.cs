@@ -10,6 +10,7 @@ namespace Church_Presenter.Views
         public LivePage()
         {
             InitializeComponent();
+            LiveOutput.Content = new LiveOutputPage();
         }
     }
 }

@@ -6,34 +6,34 @@ using System.Threading.Tasks;
 
 namespace ChurchPresenter.Core.Services
 {
-    public class MediaService
+    public static class MediaService
     {
 
-        private string GetVideoDirectory()
+        private static string GetVideoDirectory()
         {
            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Church Presenter", "Resources", "Media", "Videos");
         }
 
-        private string GetImagesDirectory()
+        private static string GetImagesDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Church Presenter", "Resources", "Media", "Images");
         }
 
-        private string GetThumbnailDirectory() 
+        private static string GetThumbnailDirectory() 
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Church Presenter", "Resources", "Media", "Thumbnails");
         }
 
-        public string GetDataDirectory()
+        private static string GetDbDataDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Church Presenter", "Resources", "Data");
         }
 
-        public bool CreateApplicationDataDirectories()
+        public static bool CreateApplicationDataDirectories()
         {
             try
             {
-                CreateDirectory(GetDataDirectory(),true);
+                CreateDirectory(GetDbDataDirectory(),true);
                 CreateDirectory(GetThumbnailDirectory(),true);
                 CreateDirectory(GetImagesDirectory());
                 CreateDirectory(GetVideoDirectory());
@@ -48,7 +48,7 @@ namespace ChurchPresenter.Core.Services
 
         }
 
-        private void CreateDirectory(string name, bool hidden = false)
+        private static void CreateDirectory(string name, bool hidden = false)
         {
             if (!Directory.Exists(name))
             {
@@ -64,25 +64,29 @@ namespace ChurchPresenter.Core.Services
         }
 
 
-        public string[] GetAllVideoFiles()
+        public static string[] GetAllVideoFiles()
         {
             return Directory.GetFiles(GetVideoDirectory());
         }
 
-        public string[] GetAllImageFiles()
+        public static string[] GetAllImageFiles()
         {
             return Directory.GetFiles(GetImagesDirectory());
 
         }
-        public string[] GetAllVideoThumbnailFiles()
+        public static string[] GetAllVideoThumbnailFiles()
         {
             return Directory.GetFiles(GetThumbnailDirectory());
         }
 
-
-        public void SaveImage()
+        public static string GetDbPath()
         {
-            //check file extensions
+            return Path.Combine( GetDbDataDirectory(), "data.lyrics");
+        }
+
+        public static void SaveImage()
+        {
+            //check file extensions copy files
 
             throw new NotImplementedException();
         }

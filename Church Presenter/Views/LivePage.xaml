@@ -9,11 +9,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
+
             <RowDefinition Height="40*" />
             <RowDefinition Height="60*" />
         </Grid.RowDefinitions>
+            <Image Source="/Resources/images/a1.png" />
         <!--<Image Source="/Resources/images/a1.png" /> videos/a2.mp4"-->
-        <MediaElement  Source="/Resources/images/a1.png" Stretch="Fill"/>
+        <Frame x:Name="LiveOutput"></Frame>
         <ListBox Grid.Row="1">
             <ListBoxItem Content="Hi there" />
             <ListBoxItem Content="Hi there" />

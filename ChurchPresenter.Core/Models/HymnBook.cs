@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ChurchPresenter.Shared;
 
 namespace ChurchPresenter.Core.Models;
 
-public class HymnBook
+public class HymnBook : Entity
 {
     public string Name { get; set; }
     public int Id { get; set; }
