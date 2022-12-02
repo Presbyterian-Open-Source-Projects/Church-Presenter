@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Church_Presenter.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -6,33 +7,20 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Threading;
+using Wpf.Ui.Demo.Services;
+using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Mvvm.Services;
 
 namespace Church_Presenter
 {
+
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : System.Windows.Application
+    public partial class App
     {
-
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            using IHost host = CreateHostBuilder(args).Build();
-            host.Start();
-
-            App app = new();
-
-            app.InitializeComponent();
-
-
-            var mainWindow = host.Services.GetRequiredService<MainWindow>();
-            app.MainWindow = mainWindow;
-            mainWindow.Show();
-
-
-            app.Run();
-        }
 
         public void MyMethod()
         {
@@ -59,19 +47,69 @@ namespace Church_Presenter
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static readonly IHost _host = 
 
-       Host.CreateDefaultBuilder(args).
+       Host.CreateDefaultBuilder().
         ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); }).
             ConfigureServices((hostContext, services) =>
        {
+           // App Host
+           services.AddHostedService<ApplicationBackgroundService>();
 
-           //services.AddSingleton<LoginView>();
-           //services.AddSingleton<LoginViewModel>();
+           // Theme manipulation
+           services.AddSingleton<IThemeService, ThemeService>();
+
+           // Taskbar manipulation
+           services.AddSingleton<ITaskBarService, TaskBarService>();
+
+           // Snackbar service
+           services.AddSingleton<ISnackbarService, SnackbarService>();
+
+           // Dialog service
+           services.AddSingleton<IDialogService, DialogService>();
+
+           // Service containing navigation, same as INavigationWindow... but without window
+           services.AddSingleton<INavigationService, NavigationService>();
+
+
+
+           // Tray icon
+           services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
+
+           // Page resolver service
+           services.AddSingleton<IPageService, PageService>();
+
+
+
            services.AddSingleton<MainWindow>();
-           //services.AddSingleton<IUserRepository, UserRepository>();
-       });
 
 
+           // Main window container with navigation
+           services.AddScoped<INavigationWindow, Views.MainFrame>();
+       }).Build();
+
+
+        public static T GetService<T>() where T : class
+        {
+            return _host.Services.GetService(typeof(T)) as T;
+        }
+
+        private async void OnStartup(object sender, StartupEventArgs e)
+        {
+            await _host.StartAsync();
+        }
+
+        private async void OnExit(object sender, ExitEventArgs e)
+        {
+            await _host.StopAsync();
+
+            _host.Dispose();
+        }
+
+
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
+        }
     }
 }

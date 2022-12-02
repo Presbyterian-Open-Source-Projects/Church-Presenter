@@ -6,17 +6,17 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<RootNamespace>Church_Presenter</RootNamespace>
-		<StartupObject>Church_Presenter.App</StartupObject>
+		<!--<StartupObject>Church_Presenter.App</StartupObject>-->
 		<UseWindowsForms>true</UseWindowsForms>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Version>$(Version)</Version>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<ApplicationDefinition Remove="App.xaml" />
 		<Page Include="App.xaml" />
-	</ItemGroup>
+	</ItemGroup>-->
 	
 	
 	<ItemGroup>
