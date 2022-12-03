@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Church_Presenter.Views;
+using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Church_Presenter.Services
@@ -32,7 +29,7 @@ namespace Church_Presenter.Services
             PrepareNavigation();
             await Task.CompletedTask;
 
-            if (!Application.Current.Windows.OfType<MainWindow>().Any())
+            if (!Application.Current.Windows.OfType<MainFrame>().Any())
 {
                 _navigationWindow = _serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow;
                 _navigationWindow!.ShowWindow();

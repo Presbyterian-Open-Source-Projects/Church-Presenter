@@ -21,12 +21,16 @@
 	
 	<ItemGroup>
 		<None Remove="Resources\images\a1.png" />
+		<None Remove="Resources\images\icon.png" />
 		<None Remove="Resources\videos\a2.mp4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Resource Include="Resources\images\a1.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\images\icon.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
 
@@ -46,6 +50,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ChurchPresenter.Core\ChurchPresenter.Core.csproj" />
 		<ProjectReference Include="..\ChurchPresenter.Shared\ChurchPresenter.Shared.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Views\Windows\" />
 	</ItemGroup>
 
 	<Target Name="FixDuplicateAnalyzers" BeforeTargets="CoreCompile">

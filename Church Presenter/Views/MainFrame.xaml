@@ -6,9 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Church_Presenter.Views"
     xmlns:pages="clr-namespace:Church_Presenter.Views.Pages"
-    mc:Ignorable="d"    
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Church Presenter"
+    Title="WPF UI"
     Width="1200"
     Height="654"
     d:DesignHeight="650"
@@ -17,12 +16,15 @@
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Frame x:Name="RootFrame" Grid.Row="1"/>
+
         <Grid
             x:Name="RootMainGrid"
             Grid.Row="1"
@@ -42,11 +44,6 @@
                 TransitionDuration="200"
                 TransitionType="FadeInWithSlide">
                 <ui:NavigationStore.Items>
-                    <ui:NavigationItem
-                        Content="Home"
-                        Icon="Home24"
-                        PageTag="home"
-                        PageType="{x:Type local:HomePage}" />
                     <ui:NavigationSeparator />
                     <ui:NavigationItem
                         Content="Hymns"
@@ -66,6 +63,8 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             ButtonLeftName="Dialog Left button click" />
+        
+        
         <Grid
             x:Name="RootWelcomeGrid"
             Grid.Row="1"
@@ -113,24 +112,24 @@
                     <ui:NotifyIcon.Menu>
                         <ContextMenu>
                             <ui:MenuItem
-                                Click="TrayMenuItem_OnClick"
+                                Click="TrayMenuItem_ChangeTheme_OnClick"
                                 Header="Home"
                                 SymbolIcon="Library28"
                                 Tag="home" />
                             <ui:MenuItem
-                                Click="TrayMenuItem_OnClick"
+                                Click="TrayMenuItem_ChangeTheme_OnClick"
                                 Header="Save"
                                 SymbolIcon="Save24"
                                 Tag="save" />
                             <ui:MenuItem
-                                Click="TrayMenuItem_OnClick"
+                                Click="TrayMenuItem_ChangeTheme_OnClick"
                                 Header="Open"
                                 SymbolIcon="Folder28"
                                 Tag="open" />
                             <Separator />
                             <ui:MenuItem
-                                Click="TrayMenuItem_OnClick"
-                                Header="Reload"
+                                Click="TrayMenuItem_ChangeTheme_OnClick"
+                                Header="Switch Theme"
                                 SymbolIcon="ArrowClockwise24"
                                 Tag="reload" />
                         </ContextMenu>
@@ -138,6 +137,7 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
+
     </Grid>
 
 </ui:UiWindow>

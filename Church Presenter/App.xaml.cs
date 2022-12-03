@@ -1,4 +1,5 @@
 ﻿using Church_Presenter.Services;
+using Church_Presenter.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +9,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using Wpf.Ui.Demo.Services;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Services;
 
@@ -71,8 +71,6 @@ namespace Church_Presenter
            // Service containing navigation, same as INavigationWindow... but without window
            services.AddSingleton<INavigationService, NavigationService>();
 
-
-
            // Tray icon
            services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
 
@@ -80,8 +78,10 @@ namespace Church_Presenter
            services.AddSingleton<IPageService, PageService>();
 
 
+           // Main window container with navigation
+           services.AddScoped<INavigationWindow, Views.MainFrame>();
+           services.AddScoped<MainFrameViewModel>();
 
-           services.AddSingleton<MainWindow>();
 
 
            // Main window container with navigation
