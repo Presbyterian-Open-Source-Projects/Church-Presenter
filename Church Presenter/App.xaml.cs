@@ -86,6 +86,11 @@ namespace Church_Presenter
 
            // Main window container with navigation
            services.AddScoped<INavigationWindow, Views.MainFrame>();
+
+           services.AddScoped<Views.Pages.HomePage>();
+           services.AddScoped<HomePageViewModel>();
+
+
        }).Build();
 
 

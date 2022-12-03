@@ -1,10 +1,12 @@
 ﻿using Church_Presenter.ViewModels;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.TaskBar;
 
 namespace Church_Presenter.Views
 {
@@ -15,6 +17,7 @@ namespace Church_Presenter.Views
     {
         private readonly IThemeService _themeService;
         private readonly ITaskBarService _taskBarService;
+        private bool _initialized = false;
 
         public MainFrameViewModel ViewModel { get; }
 
@@ -38,6 +41,8 @@ namespace Church_Presenter.Views
 
             // Allows you to use the Dialog control defined in this window in other pages or windows
             dialogService.SetDialogControl(RootDialog);
+
+            Loaded += (_, _) => InvokeSplashScreen();
         }
 
         #region INavigationWindow methods
@@ -84,6 +89,39 @@ namespace Church_Presenter.Views
                bottom: 0);
         }
 
-       
+
+        private void InvokeSplashScreen()
+        {
+            if (_initialized)
+                return;
+
+            _initialized = true;
+
+            RootMainGrid.Visibility = Visibility.Collapsed;
+            RootWelcomeGrid.Visibility = Visibility.Visible;
+
+            _taskBarService.SetState(this, TaskBarProgressState.Indeterminate);
+
+            Task.Run(async () =>
+            {
+                // Remember to always include Delays and Sleeps in
+                // your applications to be able to charge the client for optimizations later.
+                await Task.Delay(4000);
+
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    RootWelcomeGrid.Visibility = Visibility.Hidden;
+                    RootMainGrid.Visibility = Visibility.Visible;
+
+                    Navigate(typeof(Pages.HomePage));
+
+                    _taskBarService.SetState(this, TaskBarProgressState.None);
+                });
+
+                return true;
+            });
+        }
+
+
     }
 }

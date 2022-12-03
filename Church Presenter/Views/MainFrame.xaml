@@ -57,14 +57,7 @@
             </ui:NavigationStore>
         </Grid>
 
-        <ui:Dialog
-            x:Name="RootDialog"
-            Title="WPF UI"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            ButtonLeftName="Dialog Left button click" />
-        
-        
+
         <Grid
             x:Name="RootWelcomeGrid"
             Grid.Row="1"
@@ -91,6 +84,12 @@
             </StackPanel>
         </Grid>
 
+        <ui:Dialog
+            x:Name="RootDialog"
+            Title="WPF UI"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            ButtonLeftName="Click Root dialog" />
 
         <ui:TitleBar
             Title="Church Presenter - Hymns and Lyrics"
@@ -119,19 +118,19 @@
                             <ui:MenuItem
                                 Click="TrayMenuItem_ChangeTheme_OnClick"
                                 Header="Save"
-                                SymbolIcon="Save24"
+                                SymbolIcon="Save20"
                                 Tag="save" />
-                            <ui:MenuItem
-                                Click="TrayMenuItem_ChangeTheme_OnClick"
-                                Header="Open"
-                                SymbolIcon="Folder28"
-                                Tag="open" />
-                            <Separator />
                             <ui:MenuItem
                                 Click="TrayMenuItem_ChangeTheme_OnClick"
                                 Header="Switch Theme"
                                 SymbolIcon="ArrowClockwise24"
-                                Tag="reload" />
+                                Tag="switchTheme" />
+                            <Separator />
+                            <ui:MenuItem
+                                Click="TrayMenuItem_ChangeTheme_OnClick"
+                                Header="Open"
+                                SymbolIcon="ArrowExit20"
+                                Tag="close" />
                         </ContextMenu>
                     </ui:NotifyIcon.Menu>
                 </ui:NotifyIcon>
